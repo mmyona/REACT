@@ -1,0 +1,36 @@
+.App .App-button{
+    margin:6px;
+    display: inline-block;
+}
+
+/*
+가운데 정렬을 위한 부모 div 태그
+*/
+.Container{ 
+    width: 100%;
+    text-align: center;
+}
+
+.blue {
+    width:300px;
+    background-color:#5a5a5a;
+    border-style: none;
+    border-radius: 20px;
+}
+.Button.blue:hover {
+    background-color: rgba(0, 89, 255, 0.3);
+  }
+  
+.red {
+    width:300px;
+    background-color:#5a5a5a;
+    border-style: none;
+    border-radius: 20px;
+}
+.Button.red:hover {
+    background-color: rgba(255, 78, 78, 0.3);
+  }
+
+.App p{
+    font-size: 30px;
+}
