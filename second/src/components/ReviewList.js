@@ -22,14 +22,15 @@ function ReviewListItem({ item, onDelete }) {
     </div>
   );
 }
-
+//key Prop은 다른 Prop과 마찬가지로 지정할 수 있는데,
+//배열을 렌더링할 때 최상위 태그에다가 지정해주면 된다.
 function ReviewList({ items, onDelete }) {
   console.log(items);
   return (
     <ul>
       {items.map((item) => {
         return (
-          <li>
+          <li key={item.id}>
             <ReviewListItem item={item} onDelete={onDelete} />
           </li>
         );

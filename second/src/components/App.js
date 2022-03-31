@@ -1,9 +1,10 @@
 import ReviewList from "./ReviewList";
-import mockItems from "../mock.json";
+//import mockItems from "../mock.json";
 import { useState } from "react";
+import { getReviews } from "../api";
 
 function App() {
-  const [items, setItems] = useState(mockItems);
+  const [items, setItems] = useState([]);
   const [order, setOrder] = useState("createdAt");
   const sortedItems = items.sort((a, b) => b[order] - a[order]);
   /*
@@ -21,6 +22,11 @@ function App() {
   }; //id값을 받아와서->그 id값을 제외한 나머지 배열을 return해줌
   //=>삭제 기능을 수행하는 함수
 
+  const handleLoadClick = async () => {
+    const { reviews } = await getReviews();
+    setItems(reviews);
+  };
+
   return (
     <div>
       <div>
@@ -28,6 +34,7 @@ function App() {
         <button onClick={handleBestClick}>평점순</button>
       </div>
       <ReviewList items={sortedItems} onDelete={handleDelete} />
+      <button onClick={handleLoadClick}>불러오기</button>
     </div>
   );
 }
