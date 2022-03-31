@@ -22,15 +22,15 @@ function App() {
   }; //id값을 받아와서->그 id값을 제외한 나머지 배열을 return해줌
   //=>삭제 기능을 수행하는 함수
 
-  const handleLoad = async () => {
+  const handleLoad = async (orderQuery) => {
     //비동기 함수
-    const { reviews } = await getReviews();
+    const { reviews } = await getReviews(orderQuery);
     setItems(reviews);
   };
 
   useEffect(() => {
-    handleLoad();
-  }, []);
+    handleLoad(order);
+  }, [order]);
   //componenet가 처음 렌더링될 때 request를 보내고 싶다면
   //->useEffect() 사용해야 함.
 
