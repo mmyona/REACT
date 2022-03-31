@@ -3,10 +3,11 @@ import "../css/ReviewList.css";
 function formatDate(value) {
   const date = new Date(value);
   return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}`;
-}
+} //날짜 형식으로 출력해주려고 만듦
 
 function ReviewListItem({ item, onDelete }) {
   const handleDeleteClick = () => onDelete(item.id);
+  //이 함수에서는 -> onDelete 함수로 id값을 넘겨주는 역할을 함
 
   return (
     <div className="ReviewListItem">
