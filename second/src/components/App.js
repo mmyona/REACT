@@ -44,7 +44,7 @@ function App() {
     if (options.offset === 0) {
       setItems(reviews);
     } else {
-      setItems([...items, ...reviews]);
+      setItems((prevItems) => [...prevItems, ...reviews]);
     }
     setOffset(options.offset + options.limit); //offset값 설정하기
     setHasNext(paging.hasNext); //useState 값 -> false로 설정
@@ -70,9 +70,7 @@ function App() {
       </div>
 
       <ReviewList items={sortedItems} onDelete={handleDelete} />
-      <button disabled={!hasNext} onClick={handleLoadMore}>
-        더 보기
-      </button>
+      {hasNext && <button onClick={handleLoadMore}>더 보기</button>}
     </div>
   );
 }
