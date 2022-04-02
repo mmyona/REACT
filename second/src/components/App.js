@@ -14,6 +14,8 @@ function App() {
   const [hasNext, setHasNext] = useState(false);
   const [order, setOrder] = useState("createdAt");
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(null);
+  const [search, setSearch] = useState("");
 
   const sortedItems = items.sort((a, b) => b[order] - a[order]);
 
@@ -44,14 +46,15 @@ function App() {
     let result;
     try {
       setIsLoading(true);
+      setLoadingError(null);
       result = await getReviews(options);
     } catch (e) {
-      console.error(e);
+      setLoadingError(e);
       return;
     } finally {
       setIsLoading(false);
     }
-    const { paging, reviews } = await getReviews(options);
+    const { paging, reviews } = result;
     if (options.offset === 0) {
       setItems(reviews);
     } else {
@@ -62,12 +65,17 @@ function App() {
   };
 
   const handleLoadMore = () => {
-    handleLoad({ order, offset, limit: LIMIT });
+    handleLoad({ order, offset, limit: LIMIT, search });
   }; //6개 더 불러오는 함수
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearch(e.target["search"].value);
+  };
+
   useEffect(() => {
-    handleLoad({ order, offset: 0, limit: LIMIT });
-  }, [order]);
+    handleLoad({ order, offset: 0, limit: LIMIT, search });
+  }, [order, search]);
 
   //componenet가 처음 렌더링될 때 request를 보내고 싶다면
 
@@ -78,14 +86,18 @@ function App() {
       <div>
         <button onClick={handleNewestClick}>최신순</button>
         <button onClick={handleBestClick}>평점순</button>
+        <form onSubmit={handleSearchSubmit}>
+          <input name="search" />
+          <button type="submit">검색</button>
+        </form>
       </div>
-
       <ReviewList items={sortedItems} onDelete={handleDelete} />
       {hasNext && (
         <button disabled={isLoading} onClick={handleLoadMore}>
           더 보기
         </button>
       )}
+      {loadingError?.message && <span>{loadingError.message}</span>}
     </div>
   );
 }
