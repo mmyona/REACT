@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 import { getReviews } from "../api";
 
+import ReviewForm from "./ReviewForm";
+
 const LIMIT = 6; //상수로 선언함 (고정된 값이므로)
 
 function App() {
@@ -91,6 +93,7 @@ function App() {
           <button type="submit">검색</button>
         </form>
       </div>
+      <ReviewForm />
       <ReviewList items={sortedItems} onDelete={handleDelete} />
       {hasNext && (
         <button disabled={isLoading} onClick={handleLoadMore}>
