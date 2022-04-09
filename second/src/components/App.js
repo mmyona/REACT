@@ -37,7 +37,6 @@ function App() {
 
   const handleDelete = (id) => {
     const nextItems = items.filter((item) => item.id !== id);
-
     setItems(nextItems);
   }; //id값을 받아와서->그 id값을 제외한 나머지 배열을 return해줌
 

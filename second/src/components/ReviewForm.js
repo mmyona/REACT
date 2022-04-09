@@ -1,5 +1,17 @@
 import { useState } from "react";
 import "../css/ReviewForm.css";
+import FileInput from "./FileInput";
+
+function sanitize(type, value) {
+  switch (type) {
+    case "number":
+      return Number(value) || 0;
+
+    default:
+      return value;
+  }
+}
+//input이 number 타입일 경우 처리해주는 함수
 
 function ReviewForm() {
   const [values, setValues] = useState({
@@ -9,10 +21,10 @@ function ReviewForm() {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
     setValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: sanitize(type, value),
     }));
   };
 
@@ -23,6 +35,7 @@ function ReviewForm() {
 
   return (
     <form className="ReviewForm" onSubmit={handleSubmit}>
+      <FileInput />
       <input name="title" value={values.title} onChange={handleChange} />
       <input
         name="rating"
