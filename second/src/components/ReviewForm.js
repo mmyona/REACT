@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../css/ReviewForm.css";
 import FileInput from "./FileInput";
 
-function sanitize(type, value) {
+/*function sanitize(type, value) {
   switch (type) {
     case "number":
       return Number(value) || 0;
@@ -10,7 +10,7 @@ function sanitize(type, value) {
     default:
       return value;
   }
-} //input이 number 타입일 경우 처리해주는 함수
+} //input이 number 타입일 경우 처리해주는 함수*/
 
 function ReviewForm() {
   const [values, setValues] = useState({
