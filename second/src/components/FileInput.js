@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
-function FileInput() {
-  const [value, setValue] = useState();
+function FileInput({ name, value, onChange }) {
+  const inputRef = useRef();
 
   const handleChange = (e) => {
-    console.log(e.target.files);
+    const nextValue = e.target.files[0];
+    onChange(name, nextValue);
   };
 
-  return <input type="file" onChange={handleChange} />;
+  useEffect(() => {
+    console.log(inputRef);
+  }, []);
+
+  return <input type="file" onChange={handleChange} ref={inputRef} />;
 }
+
+//file input은 반드시 '비제어 input'으로 만들어야 함
 
 export default FileInput;

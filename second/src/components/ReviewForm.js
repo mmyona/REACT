@@ -10,22 +10,26 @@ function sanitize(type, value) {
     default:
       return value;
   }
-}
-//input이 number 타입일 경우 처리해주는 함수
+} //input이 number 타입일 경우 처리해주는 함수
 
 function ReviewForm() {
   const [values, setValues] = useState({
     title: "",
     rating: 0,
     content: "",
+    imgFile: null,
   });
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
+  const handleChange = (name, value) => {
     setValues((prevValues) => ({
       ...prevValues,
-      [name]: sanitize(type, value),
+      [name]: value,
     }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    handleChange(name, value);
   };
 
   const handleSubmit = (e) => {
@@ -35,15 +39,23 @@ function ReviewForm() {
 
   return (
     <form className="ReviewForm" onSubmit={handleSubmit}>
-      <FileInput />
-      <input name="title" value={values.title} onChange={handleChange} />
+      <FileInput
+        name="imgFile"
+        value={values.imgFile}
+        onChange={handleChange}
+      />
+      <input name="title" value={values.title} onChange={handleInputChange} />
       <input
         name="rating"
         type="number"
         value={values.rating}
-        onChange={handleChange}
+        onChange={handleInputChange}
       />
-      <textarea name="content" value={values.content} onChange={handleChange} />
+      <textarea
+        name="content"
+        value={values.content}
+        onChange={handleInputChange}
+      />
       <button type="submit">확인</button>
     </form>
   );
