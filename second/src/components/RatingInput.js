@@ -5,7 +5,7 @@ import "../css/RatingInput.css";
 function RatingInput({ name, value, onChange }) {
   const [rating, setRating] = useState(value);
 
-  const handleSelect = (nexValue) => onChange(name, nextValue);
+  const handleSelect = (nextValue) => onChange(name, nextValue);
 
   const handleMouesOut = () => setRating(value);
 
