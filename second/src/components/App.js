@@ -1,11 +1,6 @@
 import ReviewList from "./ReviewList";
-
-//import mockItems from "../mock.json";
-
 import { useEffect, useState } from "react";
-
 import { getReviews } from "../api";
-
 import ReviewForm from "./ReviewForm";
 
 const LIMIT = 6; //상수로 선언함 (고정된 값이므로)
@@ -38,7 +33,7 @@ function App() {
   const handleDelete = (id) => {
     const nextItems = items.filter((item) => item.id !== id);
     setItems(nextItems);
-  }; //id값을 받아와서->그 id값을 제외한 나머지 배열을 return해줌
+  }; //id값을 받아와서->그 id값을 제외한 나머지 배열(filter을 통해 모두 찾는다)을 return해줌
 
   //=>삭제 기능을 수행하는 함수
 
@@ -46,14 +41,14 @@ function App() {
     //비동기 함수
     let result;
     try {
-      setIsLoading(true);
+      setIsLoading(true); //"로딩 중이다"
       setLoadingError(null);
       result = await getReviews(options);
     } catch (e) {
       setLoadingError(e);
       return;
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); //"로딩 중이 아니다"
     }
     const { paging, reviews } = result;
     if (options.offset === 0) {
@@ -69,6 +64,9 @@ function App() {
     handleLoad({ order, offset, limit: LIMIT, search });
   }; //6개 더 불러오는 함수
 
+  const handleSubmitSuccess = (review) => {
+    setItems((prevItems) => [review, ...prevItems]);
+  };
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setSearch(e.target["search"].value);
@@ -92,7 +90,7 @@ function App() {
           <button type="submit">검색</button>
         </form>
       </div>
-      <ReviewForm />
+      <ReviewForm onSubmitSuccess={handleSubmitSuccess} />
       <ReviewList items={sortedItems} onDelete={handleDelete} />
       {hasNext && (
         <button disabled={isLoading} onClick={handleLoadMore}>
