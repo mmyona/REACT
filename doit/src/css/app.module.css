@@ -30,8 +30,7 @@ a:visited {
   min-height: 100vh;
 }
 
-.nav,
-.footer {
+.nav {
   flex: none;
 }
 

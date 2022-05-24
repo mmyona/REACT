@@ -5,7 +5,19 @@
   background-color: #fff;
   box-shadow: var(--box-shadow);
 }
-
+.imgSize {
+  width: 80px;
+  object-fit: cover;
+}
+.imgSize2 {
+  width: 20px;
+  margin-right: 30px;
+  object-fit: cover;
+}
+.imgSize3 {
+  width: 20px;
+  object-fit: cover;
+}
 .container {
   display: flex;
   align-items: center;
