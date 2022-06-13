@@ -18,6 +18,7 @@ function Nav() {
         </Link>
         <ul className={styles.menu}>
           <li>
+            <input name="search" />
             <button type="submit">검색</button>
           </li>
           <Link to="/">
