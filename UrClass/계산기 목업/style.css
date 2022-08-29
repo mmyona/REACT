@@ -1,0 +1,13 @@
+.calculator {
+  width: 350px;
+  height: 500px;
+  border: 1px solid blue;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red; /*body 상태 확인*/
+  height: 100vh; /*브라우저 화면의 높이만큼의 길이를 뜻*/
+}
