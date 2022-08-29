@@ -1,0 +1,30 @@
+main {
+  display: flex;
+  border: 1px dotted red;
+  flex-wrap: nowrap;
+}
+/* 부모 요소인 main에 작성하여(속성은 부모 요소에만 지정해주면 됩니다.) 자식 요소인 div들의 줄 바꿈을 어떻게 할지 정합니다.
+자식 요소인 <div> 요소들이 왼쪽부터 가로로 정렬된 것과 
+내용만큼의 공간을 차지하는 것을 확인할 수 있습니다.*/
+
+div {
+  border: 1px solid green;
+}
+
+* {
+  margin: 10px;
+  padding: 10px;
+}
+
+#box1 {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+#box2 {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+#box3 {
+  flex-grow: 1;
+  flex-basis: 0;
+}
